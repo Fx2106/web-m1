@@ -1,0 +1,141 @@
+:root {
+    --bg-color: #0a0a0c;
+    --board-bg: #141418;
+    --neon-green: #00ff41;
+    --neon-red: #ff3131;
+    --neon-blue: #00d2ff;
+    --text-color: #e0e0e0;
+    --grid-size: 15;
+    --cell-size: 30px;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    transition: filter 0.3s ease;
+}
+
+#game-container {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 20px var(--neon-blue);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+h1 {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+    margin-bottom: 10px;
+}
+
+#ui-panel {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.stat {
+    padding: 5px 15px;
+    border: 1px solid var(--text-color);
+}
+
+#timer {
+    color: var(--neon-red);
+    font-weight: bold;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    gap: 1px;
+    background-color: #333;
+    border: 4px solid var(--neon-blue);
+    margin: 0 auto;
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: var(--board-bg);
+}
+
+/* Elementos del juego */
+.snake {
+    background-color: var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-green);
+    border-radius: 2px;
+}
+
+.snake-head {
+    background-color: #8fffab;
+    z-index: 2;
+}
+
+.apple {
+    background-color: var(--neon-red);
+    box-shadow: 0 0 12px var(--neon-red);
+    border-radius: 50%;
+}
+
+#instructions {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Pantallas y estados */
+.hidden {
+    display: none !important;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#message-box {
+    border: 3px solid var(--neon-red);
+    padding: 40px;
+    background: #000;
+    box-shadow: 0 0 30px var(--neon-red);
+}
+
+button {
+    background: transparent;
+    color: var(--neon-blue);
+    border: 2px solid var(--neon-blue);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: var(--neon-blue);
+    color: #000;
+}
+
+/* Bonus: Modo Oscuro / Alternativo */
+body.dark-mode {
+    filter: hue-rotate(280deg) brightness(1.2);
+}

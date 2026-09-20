@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrono-Snake | Misión M1</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>CHRONO-SNAKE</h1>
+            <div id="ui-panel">
+                <div class="stat">TIEMPO: <span id="timer">60</span>s</div>
+                <div class="stat">VELOCIDAD: <span id="speed">1</span>x</div>
+            </div>
+        </header>
+
+        <main id="game-board"></main>
+
+        <section id="instructions">
+            <p>Usa las <b>flechas</b> o <b>WASD</b> para moverte.</p>
+            <p>Manzanas: <b>-5s</b> | Evita llegar a <b>100s</b>.</p>
+            <p>Presiona <b>"N"</b> para el modo secreto.</p>
+        </section>
+
+        <!-- Pantallas de estado (ocultas por defecto) -->
+        <div id="overlay" class="hidden">
+            <div id="message-box">
+                <h2 id="status-title">GAME OVER</h2>
+                <p id="status-desc">Sobrecarga temporal detectada.</p>
+                <button id="restart-btn">REINICIAR LÍNEA TEMPORAL</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
