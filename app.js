@@ -14,6 +14,10 @@ const SPEED_MULTIPLIER = 0.95;
 const boardElement = document.querySelector('#game-board');
 const timerElement = document.querySelector('#timer');
 const speedElement = document.querySelector('#speed');
+const overlayElement = document.querySelector('#overlay');
+const statusTitleElement = document.querySelector('#status-title');
+const statusDescElement = document.querySelector('#status-desc');
+const restartButtonElement = document.querySelector('#restart-btn');
 
 // 2. Estado del juego
 let snake = [
@@ -80,6 +84,10 @@ function generateApple() {
 // 5. Cambiar dirección
 window.addEventListener('keydown', (event) => {
     const key = event.key.toLowerCase();
+
+    if (key === 'n') {
+        document.body.classList.toggle('dark-mode');
+    }
 
     if (key === 'arrowup' || key === 'w') {
         if (direction.y === 0) {
@@ -166,7 +174,7 @@ function eatApple() {
 // 11. Actualizar interfaz
 function updateUI() {
     timerElement.textContent = timer;
-    
+
     const currentSpeed = INITIAL_SPEED / gameSpeed;
     speedElement.textContent = `${currentSpeed.toFixed(1)}`;
 }
@@ -202,15 +210,14 @@ function draw() {
 }
 
 // 13. Terminar partida
-function endGame(message) {
+function endGame(title, message) {
     gameRunning = false;
-
     clearTimeout(gameInterval);
     clearInterval(timerInterval);
 
-    alert(message);
-
-    resetGame();
+    statusTitleElement.textContent = title;
+    statusDescElement.textContent = message;
+    overlayElement.classList.remove('hidden');
 }
 
 // 14. Bucle de movimiento
@@ -223,13 +230,19 @@ function gameLoop() {
 
     // Colisión con muro
     if (hasHitWall()) {
-        endGame('¡Has chocado con el muro!');
+        endGame(
+            'GAME OVER',
+            '¡Has chocado contra el muro!'
+        );
         return;
     }
 
     // Colisión consigo misma
     if (hasHitSelf()) {
-        endGame('¡Te has chocado contigo mismo!');
+        endGame(
+            'GAME OVER',
+            '¡Te has chocado contigo mismo!'
+        );
         return;
     }
 
@@ -239,7 +252,10 @@ function gameLoop() {
 
         // Victoria
         if (timer <= 0) {
-            endGame('¡VICTORIA! ¡Has llevado el tiempo a 0 segundos!');
+            endGame(
+                '¡VICTORIA!',
+                'Has conseguido llevar el tiempo a 0 segundos.'
+            );
             return;
         }
     }
@@ -261,7 +277,10 @@ function updateTimer() {
     if (timer >= MAX_TIME) {
         timer = MAX_TIME;
         updateUI();
-        endGame('¡SOBRECARGA TEMPORAL! Has llegado a 100 segundos.');
+        endGame(
+            'SOBRECARGA TEMPORAL',
+            'El reloj ha llegado a 100 segundos.'
+        );
         return;
     }
 
@@ -274,6 +293,8 @@ function updateTimer() {
 function resetGame() {
     clearTimeout(gameInterval);
     clearInterval(timerInterval);
+
+    overlayElement.classList.add('hidden');
 
     snake = [
         { x: 7, y: 7 },
@@ -301,6 +322,10 @@ function resetGame() {
     gameInterval = setTimeout(gameLoop, gameSpeed);
     timerInterval = setInterval(updateTimer, 1000);
 }
+
+restartButtonElement.addEventListener('click', () => {
+    resetGame();
+});
 
 // 18. Inicialización
 createBoard();
