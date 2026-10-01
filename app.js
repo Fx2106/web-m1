@@ -82,7 +82,7 @@ function generateApple() {
 }
 
 // 5. Cambiar dirección
-window.addEventListener('keydown', (event) => {
+document.addEventListener('keydown', (event) => {
     const key = event.key.toLowerCase();
 
     if (key === 'n') {
