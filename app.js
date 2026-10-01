@@ -289,7 +289,7 @@ function updateTimer() {
 
 
 
-// 17. Reiniciar partida
+// 16. Reiniciar partida
 function resetGame() {
     clearTimeout(gameInterval);
     clearInterval(timerInterval);
@@ -327,6 +327,6 @@ restartButtonElement.addEventListener('click', () => {
     resetGame();
 });
 
-// 18. Inicialización
+// 17. Inicialización
 createBoard();
 resetGame();
